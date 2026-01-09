@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ogs-gmbh/markdown':
-        specifier: file:/home/simonkov/Projects/ogs/github/markdown/dist/main
-        version: file:../markdown/dist/main
+        specifier: ^1
+        version: 1.1.1
       '@ogs-gmbh/stdx':
         specifier: ^1
         version: 1.1.0
@@ -818,8 +818,8 @@ packages:
       typescript-eslint:
         optional: true
 
-  '@ogs-gmbh/markdown@file:../markdown/dist/main':
-    resolution: {directory: ../markdown/dist/main, type: directory}
+  '@ogs-gmbh/markdown@1.1.1':
+    resolution: {integrity: sha512-goVi54cDWh6w5R5U6Sh6WoSPM7lM4j6GmNIrOzM7IBC0VNL04GQDjvocYzZ9k5T0MmPCkdC4tTxNgSedCUBhCQ==}
 
   '@ogs-gmbh/stdx@1.1.0':
     resolution: {integrity: sha512-ixdUjbyW3vnHrPKt55dT15i1WzUeK3++9okRv9NZ6J0EXYyovnB3momNIu0HmQOr34+Emn1Voa+FCbF3+1crFQ==}
@@ -3843,7 +3843,7 @@ snapshots:
       npm-package-json-lint: 8.0.0(typescript@5.9.3)
       typescript-eslint: 8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
 
-  '@ogs-gmbh/markdown@file:../markdown/dist/main': {}
+  '@ogs-gmbh/markdown@1.1.1': {}
 
   '@ogs-gmbh/stdx@1.1.0': {}
 

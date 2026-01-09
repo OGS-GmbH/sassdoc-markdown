@@ -48,7 +48,7 @@
     "vitepress:preview": "vitepress preview .vitepress"
   },
   "dependencies": {
-    "@ogs-gmbh/markdown": "file:/home/simonkov/Projects/ogs/github/markdown/dist/main",
+    "@ogs-gmbh/markdown": "^1",
     "@ogs-gmbh/stdx": "^1",
     "commander": "^14"
   },
