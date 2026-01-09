@@ -1,18 +1,20 @@
 import type { Node, Type } from "../type";
+import { define, heading, linebreak, list, rule } from "@ogs-gmbh/markdown";
+import type { FilteredNodes } from "./filter";
 import { typeToHeading } from "../utils";
-import { define, heading, list, rule } from "@ogs-gmbh/markdown";
 
-function transformOverview (filteredNodes: Record<Type, Node[]>): string {
+function transformOverview (filteredNodes: Record<Type, FilteredNodes>): string {
   return Object.entries(
     filteredNodes
-  ).map(([key, nodes]) => {
-    const headingContent: string = typeToHeading(key);
+  ).map(([key, filteredNodesItem]) => {
+    const headingContent: string = filteredNodesItem.isCustom ? key : typeToHeading(key);
 
     return define(
-      heading("h2", headingContent),
+      heading("h2", headingContent.capitalize()),
+      linebreak("system"),
       list(
         "unordered",
-        nodes.map((node) => `${node.context.name}`)
+        ...filteredNodesItem.nodes.map((node: Node): string => `${node.context.name}`)
       ),
       rule("hyphens")
     ).toString();

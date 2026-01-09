@@ -1,7 +1,5 @@
-import { define, type Node as MarkdownNode } from "@ogs-gmbh/markdown";
-import { spreadNullish } from "../utils";
-import { transformDefaultHeader } from "./additional";
-import { handleNodeField } from "./node";
+import { define } from "@ogs-gmbh/markdown";
+import { handleNodeFields } from "./node";
 import type { Node, NodeField } from "../type";
 
 const FUNCTION_FIELDS: NodeField[] = [
@@ -22,9 +20,14 @@ const FUNCTION_FIELDS: NodeField[] = [
   "todo"
 ]
 
-function transformFunction (node: Node): string {
+function transformFunction (node: Node): string | null {
+  const markdownNodes = handleNodeFields(FUNCTION_FIELDS, node);
+
+  if (markdownNodes === null)
+    return null;
+
   return define(
-    FUNCTION_FIELDS.map((field: NodeField): MarkdownNode[] | null => handleNodeField(field, node))
+    ...markdownNodes
   ).toString();
 }
 
@@ -45,9 +48,14 @@ const VARIABLE_FIELDS: NodeField[] = [
   "type"
 ];
 
-function transformVariable (node: Node): string {
+function transformVariable (node: Node): string | null {
+  const markdownNodes = handleNodeFields(VARIABLE_FIELDS, node);
+
+  if (markdownNodes === null)
+    return null;
+
   return define(
-    VARIABLE_FIELDS.map((field: NodeField) => handleNodeField(field, node))
+    ...markdownNodes
   ).toString();
 }
 
@@ -71,32 +79,75 @@ const MIXIN_FIELDS: NodeField[] = [
   "todo",
 ]
 
-function transformMixin (node: Node): string {
+function transformMixin (node: Node): string | null {
+  const markdownNodes = handleNodeFields(MIXIN_FIELDS, node);
+
+  if (markdownNodes === null)
+    return null;
+
   return define(
-    )
+    ...markdownNodes
   ).toString();
 }
 
-function transformPlaceholder (node: Node): string {
+const PLACEHOLDER_FIELDS: NodeField[] = [
+  "access",
+  "author",
+  "deprecated",
+  "example",
+  "group",
+  "ignore",
+  "link",
+  "name",
+  "require",
+  "see",
+  "since",
+  "throw",
+  "todo",
+  "type"
+]
+
+function transformPlaceholder (node: Node): string | null {
+  const markdownNodes = handleNodeFields(PLACEHOLDER_FIELDS, node);
+
+  if (markdownNodes === null)
+    return null;
+
   return define(
-    ...spreadNullish(
-      transformDefaultHeader(node)
-    ),
-    ...spreadNullish(
-      transformAccess(node)
-    )
+    ...markdownNodes
   ).toString();
 }
 
-function transformDetail (node: Node): string {
+function handleNode (node: Node): string | null {
   switch (node.context.type) {
     case "function": {
-      break;
+      return transformFunction(node)
     }
 
     case "variable": {
-      break;
+      return transformVariable(node);
+    }
+
+    case "placeholder": {
+      return transformPlaceholder(node);
+    }
+
+    case "mixin": {
+      return transformMixin(node);
     }
   }
 
+  return null;
+}
+
+export {
+  FUNCTION_FIELDS,
+  transformFunction,
+  VARIABLE_FIELDS,
+  transformVariable,
+  MIXIN_FIELDS,
+  transformMixin,
+  PLACEHOLDER_FIELDS,
+  transformPlaceholder,
+  handleNode
 }

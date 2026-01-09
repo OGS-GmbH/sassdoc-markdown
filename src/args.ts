@@ -1,7 +1,24 @@
-import yargs from "yargs";
+import { Command } from "commander";
 
-function parseArgs () {
-  yargs()
-    .scriptName("sassdoc-markdown - SassDoc to Markdown")
-    .usage("$0 [options]")
+type Args = {
+  out: string
+}
+
+// @ts-ignore fsasfasfa
+function parseArgs (): Args {
+  return new Command()
+    .name("sassdoc-markdown")
+    .version("0.1.0", "--version")
+    .requiredOption("--out <string>", "output path")
+    .helpOption("--help")
+    .parse()
+    .opts()
+}
+
+export type {
+  Args
+}
+
+export {
+  parseArgs
 }

@@ -1,5 +1,6 @@
-import { code, heading, paragraph, rule, table, tableCell, tableRow, type TableRowNode, type Node as MarkdownNode, list, link } from "@ogs-gmbh/markdown";
-import type { Example, Link, Node, NodeField, Parameter, Property, Since } from "../type";
+import { code, heading, paragraph, rule, table, tableCell, tableRow, type TableRowNode, type Node as MarkdownNode, list, link, linebreak } from "@ogs-gmbh/markdown";
+import type { Example, Link, Node, NodeField, Parameter, Property, Require, Since } from "../type";
+import { transformDefaultHeader } from "./additional";
 
 function transformAccess (node: Node): MarkdownNode[] | null {
   if (!node.access)
@@ -7,8 +8,11 @@ function transformAccess (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Access"),
+    linebreak("system"),
     paragraph(node.access),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -18,8 +22,11 @@ function transformAlias (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Alias"),
+    linebreak("system"),
     paragraph(node.alias),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -29,8 +36,11 @@ function transformAuthor (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Author"),
+    linebreak("system"),
     paragraph(node.author),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -40,8 +50,11 @@ function transformContent (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Content"),
+    linebreak("system"),
     paragraph(node.content),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -51,8 +64,11 @@ function transformDeprecated (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Deprecated"),
+    linebreak("system"),
     paragraph(node.deprecated),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -62,12 +78,15 @@ function transformExample (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Examples"),
+    linebreak("system"),
     node.example.map((example: Example) => [
       code(example.code, {
         language: example.type
       })
     ]).flat(),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -77,8 +96,10 @@ function transformGroup (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Groups"),
+    linebreak("system"),
     list("unordered", ...node.group),
-    rule("hyphens")
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -88,8 +109,10 @@ function transformIgnore (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Ignores"),
+    linebreak("system"),
     list("unordered", ...node.ignore),
-    rule("hyphens")
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -99,8 +122,11 @@ function transformLink (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Links"),
+    linebreak("system"),
     node.link.map((_link: Link) => link(_link.url, _link.caption)).flat(),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -110,8 +136,11 @@ function transformOutput (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Output"),
+    linebreak("system"),
     paragraph(node.output),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -119,8 +148,11 @@ function transformParameter (node: Node): MarkdownNode[] | null {
   if (!node.parameter)
     return null;
 
+  console.dir(node.parameter);
+
   return [
     heading("h2", "Parameters"),
+    linebreak("system"),
     table(
       tableRow(
         tableCell("Parameter"),
@@ -133,7 +165,9 @@ function transformParameter (node: Node): MarkdownNode[] | null {
         tableCell(parameter.description)
       ))
     ),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -143,6 +177,7 @@ function transformProperty (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Properties"),
+    linebreak("system"),
     table(
       tableRow(
         tableCell("Parameter"),
@@ -155,7 +190,9 @@ function transformProperty (node: Node): MarkdownNode[] | null {
         tableCell(property.description)
       ))
     ),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -165,8 +202,20 @@ function transformRequire (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Requires"),
-    node.require.map((require: string) => paragraph(require)).flat(),
-    rule("hyphens")
+    linebreak("system"),
+    table(
+      tableRow(
+        tableCell("Type"),
+        tableCell("Name")
+      ),
+      ...node.require.map((require: Require): TableRowNode => tableRow(
+        tableCell(require.type),
+        tableCell(require.name)
+      ))
+    ),
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -176,9 +225,13 @@ function transformReturn (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Returns"),
+    linebreak("system"),
     code(node.return.type),
+    linebreak("system"),
     paragraph(node.return.description),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -188,8 +241,11 @@ function transformSee (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "See"),
+    linebreak("system"),
     node.see.map((seeNode: Node): MarkdownNode => paragraph(seeNode.context.name)),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -199,8 +255,11 @@ function transformSince (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Since"),
+    linebreak("system"),
     node.since.map((since: Since) => paragraph(since.version)).flat(),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -210,8 +269,10 @@ function transformThrow (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Throws"),
+    linebreak("system"),
     list("unordered", ...node.throw),
-    rule("hyphens")
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
@@ -221,8 +282,10 @@ function transformTodo (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Type"),
+    linebreak("system"),
     list("unordered", ...node.todo),
-    rule("hyphens")
+    rule("hyphens"),
+    linebreak("system")
   ]
 }
 
@@ -232,12 +295,15 @@ function transformType (node: Node): MarkdownNode[] | null {
 
   return [
     heading("h2", "Type"),
+    linebreak("system"),
     paragraph(node.type),
-    rule("hyphens")
+    linebreak("system"),
+    rule("hyphens"),
+    linebreak("system")
   ];
 }
 
-function handleNodeField (field: NodeField, node: Node): MarkdownNode[] | null {
+function mapNodeField (field: NodeField, node: Node): MarkdownNode[] | null {
   switch (field) {
     case "access": {
       return transformAccess(node);
@@ -315,6 +381,35 @@ function handleNodeField (field: NodeField, node: Node): MarkdownNode[] | null {
   return null;
 }
 
+function handleNodeFields (fields: NodeField[], node: Node): MarkdownNode[] | null {
+  const markdownNodes: MarkdownNode[] = [];
+
+  const headerNodes = transformDefaultHeader(node);
+
+  for (const headerNode of headerNodes) {
+    if (headerNode === null)
+      continue;
+
+    markdownNodes.push(headerNode);
+  }
+
+  for (const field of fields) {
+    const currentMarkdownNodes = mapNodeField(field, node);
+
+    if (currentMarkdownNodes === null)
+      continue;
+
+    markdownNodes.push(
+      ...currentMarkdownNodes
+    );
+  }
+
+  if (markdownNodes.length === 0)
+    return null;
+
+  return markdownNodes;
+}
+
 export {
   transformReturn,
   transformParameter,
@@ -330,5 +425,6 @@ export {
   transformAlias,
   transformSee,
   transformAccess,
-  handleNodeField
+  mapNodeField,
+  handleNodeFields
 }

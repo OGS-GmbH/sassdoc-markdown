@@ -23,11 +23,6 @@ function typeToHeading (type: Type): string {
   }
 }
 
-function spreadNullish <T> (value: T[] | null): Array<T | null> {
-  return value ?? [ null ];
-}
-
 export {
-  typeToHeading,
-  spreadNullish
+  typeToHeading
 }

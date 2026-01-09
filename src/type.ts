@@ -1,4 +1,4 @@
-type Type = "String" | "Number" | "Boolean" | "Color" | "Map" | "List" | "Null" | "variable" | "ArgList" | "function" | "Mixin" | "Selector" | "Any" | (string & {});
+type Type = "String" | "Number" | "Boolean" | "Color" | "Map" | "List" | "Null" | "variable" | "ArgList" | "function" | "mixin" | "Selector" | "Any" | (string & {});
 
 type NodeField = "access" | "alias" | "author" | "content" | "deprecated" | "example" | "group" | "ignore" | "link" | "name" | "output" | "parameter" | "property" | "require" | "return" | "see" | "since" | "throw" | "todo" | "type";
 
@@ -55,7 +55,12 @@ type Property = {
   type: Type;
   name: string;
   description: string;
-}
+};
+
+type Require = {
+  type: string;
+  name: string;
+};
 
 type Node = {
   commentRange: Range;
@@ -75,7 +80,7 @@ type Node = {
   output: string;
   parameter: Parameter[];
   property: Property[];
-  require: string[];
+  require: Require[];
   return: Return;
   see: Node[],
   since: Since[];
@@ -99,5 +104,6 @@ export type {
   UsedBy,
   Property,
   Access,
+  Require,
   Node
 }
