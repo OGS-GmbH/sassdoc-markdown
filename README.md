@@ -6,6 +6,10 @@
 
 Convert your SassDoc documentation to Markdown
 
+## Documentation
+
+Refer to the official documentation at [https://ogs-gmbh.github.io/sassdoc-markdown](https://ogs-gmbh.github.io/sassdoc-markdown).
+
 ## License
 
 The MIT License (MIT) - Please have a look at the [LICENSE file](./LICENSE) for more details.
@@ -20,7 +24,15 @@ Feel free to submit a pull request or start a discussion — we're happy to coll
 
 ---
 
-<a href="https://www.ogs.de/en/"><img src="https://www.ogs.de/fileadmin/templates/main/img/logo.png" height="32" /></a>
+<a href="https://www.ogs.de/en/">
+  <picture>
+    <source
+      srcset="https://raw.githubusercontent.com/OGS-GmbH/.github/refs/tags/v1.0.0/docs/assets/logo/dark.svg"
+      media="(prefers-color-scheme: light)"
+    />
+    <img height="64" alt="OGS Logo" src="https://raw.githubusercontent.com/OGS-GmbH/.github/refs/tags/v1.0.0/docs/assets/logo/light.svg"
+  </picture>
+</a>
 
 <p>Gesellschaft für Datenverarbeitung und Systemberatung mbH</p>
 
