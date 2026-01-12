@@ -1,6 +1,6 @@
 > *We're OGS, check out our work on [github.com/ogs-gmbh](https://github.com/ogs-gmbh)*
   
-# SassDoc to Markdown Library
+# SassDoc → Markdown
 
 *`sassdoc-markdown` is a command-line utility to convert your SassDoc documentation to Markdown*
 
