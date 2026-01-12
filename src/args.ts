@@ -1,10 +1,9 @@
 import { Command } from "commander";
 
 type Args = {
-  out: string
-}
+  out: string;
+};
 
-// @ts-ignore fsasfasfa
 function parseArgs (): Args {
   return new Command()
     .name("sassdoc-markdown")
@@ -12,13 +11,12 @@ function parseArgs (): Args {
     .requiredOption("--out <string>", "output path")
     .helpOption("--help")
     .parse()
-    .opts()
+    .opts();
 }
 
 export type {
   Args
-}
-
+};
 export {
   parseArgs
-}
+};

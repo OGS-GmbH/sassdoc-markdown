@@ -1,4 +1,4 @@
-# Markdown Library
+# SassDoc to Markdown Library
 
 ![GitHub License](https://img.shields.io/github/license/OGS-GmbH/sassdoc-markdown?color=0f434e)
 ![NPM Version](https://img.shields.io/npm/v/%40ogs-gmbh%2Fsassdoc-markdown?color=0f434e)

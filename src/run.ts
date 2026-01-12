@@ -1,8 +1,18 @@
 import { filterNodes, handleNode, transformOverview, type FilteredNodes } from "./public-api";
+/* eslint-disable-next-line @tseslint/no-shadow */
 import type { Node, Type } from "./type";
 import fs from "node:fs";
 import path from "node:path";
 
+/**
+ * Run the markdown generator
+ * @param nodes - SassDoc nodes
+ * @param out - Output path
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 export function run (nodes: Node[], out: string): void {
   const filteredNodes: Record<Type, FilteredNodes> = filterNodes(nodes);
   const index: string = transformOverview(filteredNodes);
@@ -19,7 +29,7 @@ export function run (nodes: Node[], out: string): void {
     index
   );
 
-  for (const [type, filteredNodesItem] of Object.entries(filteredNodes)) {
+  for (const [ type, filteredNodesItem ] of Object.entries(filteredNodes)) {
     fs.mkdirSync(
       path.join(
         out,
@@ -38,10 +48,10 @@ export function run (nodes: Node[], out: string): void {
         path.join(
           out,
           type,
-          `${node.context.name}.md`
+          `${ node.context.name }.md`
         ),
         content
-      )
+      );
     }
   }
 }

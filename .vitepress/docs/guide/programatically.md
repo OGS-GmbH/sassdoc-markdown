@@ -2,9 +2,9 @@
 
 ## Usage
 
-As another public API, `sassdoc-markdown` can be called by your own script. If you're unsure about parts of the API, keep in mind, that you can always consult the [references](/references) for detailed documentation.
+As another public API, `sassdoc-markdown` can be called by your own script. If you're unsure about parts of the API, keep in mind, that you can always consult the [reference](/reference) for detailed documentation.
 
-Here is an example with usage of [`run`]();
+Here is an example with usage of [`run`](../reference/functions/run);
 
 ```ts [example-script.ts]
 import { run, type Node } from "@ogs-gmbh/sassdoc-markdown";

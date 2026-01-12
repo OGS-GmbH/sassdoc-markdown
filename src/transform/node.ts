@@ -1,7 +1,17 @@
 import { code, heading, paragraph, rule, table, tableCell, tableRow, type TableRowNode, type Node as MarkdownNode, list, link, linebreak } from "@ogs-gmbh/markdown";
+/* eslint-disable-next-line @tseslint/no-shadow */
 import type { Example, Link, Node, NodeField, Parameter, Property, Require, Since } from "../type";
 import { transformDefaultHeader } from "./additional";
 
+/**
+ * Transform SassDoc node access field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformAccess (node: Node): MarkdownNode[] | null {
   if (!node.access)
     return null;
@@ -13,9 +23,18 @@ function transformAccess (node: Node): MarkdownNode[] | null {
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node alias field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformAlias (node: Node): MarkdownNode[] | null {
   if (!node.alias)
     return null;
@@ -27,9 +46,18 @@ function transformAlias (node: Node): MarkdownNode[] | null {
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node author field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformAuthor (node: Node): MarkdownNode[] | null {
   if (!node.author)
     return null;
@@ -44,6 +72,15 @@ function transformAuthor (node: Node): MarkdownNode[] | null {
   ];
 }
 
+/**
+ * Transform SassDoc node content field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformContent (node: Node): MarkdownNode[] | null {
   if (!node.content)
     return null;
@@ -58,6 +95,15 @@ function transformContent (node: Node): MarkdownNode[] | null {
   ];
 }
 
+/**
+ * Transform SassDoc node deprecated field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformDeprecated (node: Node): MarkdownNode[] | null {
   if (!node.deprecated)
     return null;
@@ -72,6 +118,15 @@ function transformDeprecated (node: Node): MarkdownNode[] | null {
   ];
 }
 
+/**
+ * Transform SassDoc node example field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformExample (node: Node): MarkdownNode[] | null {
   if (!node.example)
     return null;
@@ -79,17 +134,26 @@ function transformExample (node: Node): MarkdownNode[] | null {
   return [
     heading("h2", "Examples"),
     linebreak("system"),
-    node.example.map((example: Example) => [
+    node.example.flatMap((example: Example) => [
       code(example.code, {
         language: example.type
       })
-    ]).flat(),
+    ]),
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
   ];
 }
 
+/**
+ * Transform SassDoc node group field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformGroup (node: Node): MarkdownNode[] | null {
   if (!node.group)
     return null;
@@ -100,9 +164,18 @@ function transformGroup (node: Node): MarkdownNode[] | null {
     list("unordered", ...node.group),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node ignore field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformIgnore (node: Node): MarkdownNode[] | null {
   if (!node.ignore)
     return null;
@@ -113,9 +186,18 @@ function transformIgnore (node: Node): MarkdownNode[] | null {
     list("unordered", ...node.ignore),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node link field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformLink (node: Node): MarkdownNode[] | null {
   if (!node.link)
     return null;
@@ -123,13 +205,22 @@ function transformLink (node: Node): MarkdownNode[] | null {
   return [
     heading("h2", "Links"),
     linebreak("system"),
-    node.link.map((_link: Link) => link(_link.url, _link.caption)).flat(),
+    node.link.flatMap((_link: Link) => link(_link.url, _link.caption)),
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
   ];
 }
 
+/**
+ * Transform SassDoc node output field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformOutput (node: Node): MarkdownNode[] | null {
   if (!node.output)
     return null;
@@ -141,14 +232,21 @@ function transformOutput (node: Node): MarkdownNode[] | null {
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node parameter field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformParameter (node: Node): MarkdownNode[] | null {
   if (!node.parameter)
     return null;
-
-  console.dir(node.parameter);
 
   return [
     heading("h2", "Parameters"),
@@ -171,6 +269,15 @@ function transformParameter (node: Node): MarkdownNode[] | null {
   ];
 }
 
+/**
+ * Transform SassDoc node property field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformProperty (node: Node): MarkdownNode[] | null {
   if (!node.property)
     return null;
@@ -193,9 +300,18 @@ function transformProperty (node: Node): MarkdownNode[] | null {
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node require field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformRequire (node: Node): MarkdownNode[] | null {
   if (!node.require)
     return null;
@@ -219,22 +335,40 @@ function transformRequire (node: Node): MarkdownNode[] | null {
   ];
 }
 
+/**
+ * Transform SassDoc node return field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformReturn (node: Node): MarkdownNode[] | null {
-  if (!node.return)
+  if (!node[ "return" ])
     return null;
 
   return [
     heading("h2", "Returns"),
     linebreak("system"),
-    code(node.return.type),
+    code(node[ "return" ].type),
     linebreak("system"),
-    paragraph(node.return.description),
+    paragraph(node[ "return" ].description),
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
   ];
 }
 
+/**
+ * Transform SassDoc node see field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformSee (node: Node): MarkdownNode[] | null {
   if (!node.see)
     return null;
@@ -246,9 +380,18 @@ function transformSee (node: Node): MarkdownNode[] | null {
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node since field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformSince (node: Node): MarkdownNode[] | null {
   if (!node.since)
     return null;
@@ -256,26 +399,44 @@ function transformSince (node: Node): MarkdownNode[] | null {
   return [
     heading("h2", "Since"),
     linebreak("system"),
-    node.since.map((since: Since) => paragraph(since.version)).flat(),
+    node.since.flatMap((since: Since) => paragraph(since.version)),
     linebreak("system"),
     rule("hyphens"),
     linebreak("system")
   ];
 }
 
+/**
+ * Transform SassDoc node throw field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformThrow (node: Node): MarkdownNode[] | null {
-  if (!node.throw)
+  if (!node[ "throw" ])
     return null;
 
   return [
     heading("h2", "Throws"),
     linebreak("system"),
-    list("unordered", ...node.throw),
+    list("unordered", ...node[ "throw" ]),
     rule("hyphens"),
     linebreak("system")
   ];
 }
 
+/**
+ * Transform SassDoc node todo field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformTodo (node: Node): MarkdownNode[] | null {
   if (!node.todo)
     return null;
@@ -286,9 +447,18 @@ function transformTodo (node: Node): MarkdownNode[] | null {
     list("unordered", ...node.todo),
     rule("hyphens"),
     linebreak("system")
-  ]
+  ];
 }
 
+/**
+ * Transform SassDoc node type field to Markdown nodes
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function transformType (node: Node): MarkdownNode[] | null {
   if (!node.type)
     return null;
@@ -303,8 +473,22 @@ function transformType (node: Node): MarkdownNode[] | null {
   ];
 }
 
+/**
+ * Transform SassDoc node field to Markdown nodes
+ * @param field - SassDoc node field
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes, or null if field is not recognized
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function mapNodeField (field: NodeField, node: Node): MarkdownNode[] | null {
   switch (field) {
+    case "alias": {
+      return transformAlias(node);
+    }
+
     case "access": {
       return transformAccess(node);
     }
@@ -376,15 +560,26 @@ function mapNodeField (field: NodeField, node: Node): MarkdownNode[] | null {
     case "type": {
       return transformType(node);
     }
-  }
 
-  return null;
+    default: {
+      return null;
+    }
+  }
 }
 
+/**
+ * Handle SassDoc node fields and transform them to Markdown nodes
+ * @param fields - SassDoc node fields to handle
+ * @param node - SassDoc node
+ * @returns Array of Markdown nodes
+ *
+ * @category Transform
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function handleNodeFields (fields: NodeField[], node: Node): MarkdownNode[] | null {
   const markdownNodes: MarkdownNode[] = [];
-
-  const headerNodes = transformDefaultHeader(node);
+  const headerNodes: Array<MarkdownNode | null> = transformDefaultHeader(node);
 
   for (const headerNode of headerNodes) {
     if (headerNode === null)
@@ -394,7 +589,7 @@ function handleNodeFields (fields: NodeField[], node: Node): MarkdownNode[] | nu
   }
 
   for (const field of fields) {
-    const currentMarkdownNodes = mapNodeField(field, node);
+    const currentMarkdownNodes: MarkdownNode[] | null = mapNodeField(field, node);
 
     if (currentMarkdownNodes === null)
       continue;
@@ -427,4 +622,4 @@ export {
   transformAccess,
   mapNodeField,
   handleNodeFields
-}
+};

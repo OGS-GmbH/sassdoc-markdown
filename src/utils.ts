@@ -1,28 +1,53 @@
 import type { Type } from "./type";
 
+/**
+ * Convert a SassDoc node type to a heading string
+ * @param type - SassDoc node type
+ * @returns Heading
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 function typeToHeading (type: Type): string {
   switch (type) {
-    case "String":
+    case "String": {
       return "Strings";
-    case "Number":
+    }
+
+    case "Number": {
       return "Numbers";
-    case "Boolean":
+    }
+
+    case "Boolean": {
       return "Booleans";
-    case "Color":
+    }
+
+    case "Color": {
       return "Colors";
-    case "Map":
+    }
+
+    case "Map": {
       return "Maps";
-    case "List":
+    }
+
+    case "List": {
       return "Lists";
-    case "function":
+    }
+
+    case "function": {
       return "Functions";
-    case "Mixin":
+    }
+
+    case "Mixin": {
       return "Mixins";
-    default:
+    }
+
+    default: {
       return "Other";
+    }
   }
 }
 
 export {
   typeToHeading
-}
+};
