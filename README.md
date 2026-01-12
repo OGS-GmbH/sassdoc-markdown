@@ -1,14 +1,16 @@
+> *We're OGS, check out our work on [github.com/ogs-gmbh](https://github.com/ogs-gmbh)*
+  
 # SassDoc to Markdown Library
 
-![GitHub License](https://img.shields.io/github/license/OGS-GmbH/sassdoc-markdown?color=0f434e)
-![NPM Version](https://img.shields.io/npm/v/%40ogs-gmbh%2Fsassdoc-markdown?color=0f434e)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/OGS-GmbH/sassdoc-markdown/main-deploy.yml?color=0f434e)
+*`sassdoc-markdown` is a command-line utility to convert your SassDoc documentation to Markdown*
 
-Convert your SassDoc documentation to Markdown
+<a href="./LICENSE" target="_blank"><img src="https://img.shields.io/github/license/OGS-GmbH/sassdoc-markdown?color=0f434e&logo=hackthebox&logoColor=000000&labelColor=ffffff" /></a>
+<a href="https://github.com/OGS-GmbH/sassdoc-markdown/actions/workflows/main-deploy.yml" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/OGS-GmbH/sassdoc-markdown/main-deploy.yml?color=0f434e&logo=rocket&logoColor=000000&labelColor=ffffff" /></a>
+<a href="https://www.npmjs.com/package/@ogs-gmbh/sassdoc-markdown" target="_blank"><img src="https://img.shields.io/npm/v/%40ogs-gmbh%2Fsassdoc-markdown?color=0f434e&logo=npm&logoColor=000000&labelColor=ffffff" /></a>
 
-## Documentation
+## Getting Started
 
-Refer to the official documentation at [https://ogs-gmbh.github.io/sassdoc-markdown](https://ogs-gmbh.github.io/sassdoc-markdown).
+To get a knowledge and reference, refer to the official documentation at [https://ogs-gmbh.github.io/sassdoc-markdown](https://ogs-gmbh.github.io/sassdoc-markdown).
 
 ## License
 
