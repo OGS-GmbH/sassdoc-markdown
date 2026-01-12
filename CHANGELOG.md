@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/OGS-GmbH/sassdoc-markdown/compare/v1.0.0...v1.0.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* **readme:** default to dark logo in favor of npm ([2f46070](https://github.com/OGS-GmbH/sassdoc-markdown/commit/2f46070788c825172c925765efe1710a38f54153))
+
 ## 1.0.0 (2026-01-12)
 
 
