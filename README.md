@@ -29,10 +29,10 @@ Feel free to submit a pull request or start a discussion — we're happy to coll
 <a href="https://www.ogs.de/en/">
   <picture>
     <source
-      srcset="https://raw.githubusercontent.com/OGS-GmbH/.github/refs/tags/v1.0.0/docs/assets/logo/dark.svg"
-      media="(prefers-color-scheme: light)"
+      srcset="https://raw.githubusercontent.com/OGS-GmbH/.github/refs/tags/v1.0.0/docs/assets/logo/light.svg"
+      media="(prefers-color-scheme: dark)"
     />
-    <img height="64" alt="OGS Logo" src="https://raw.githubusercontent.com/OGS-GmbH/.github/refs/tags/v1.0.0/docs/assets/logo/light.svg"
+    <img height="64" alt="OGS Logo" src="https://raw.githubusercontent.com/OGS-GmbH/.github/refs/tags/v1.0.0/docs/assets/logo/dark.svg"
   </picture>
 </a>
 
