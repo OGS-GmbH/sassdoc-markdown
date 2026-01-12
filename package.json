@@ -1,26 +1,91 @@
 {
-  "name": "sassdoc-markdown",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "ci:build:main:production": "node .esbuild/build.mjs"
-  },
-  "keywords": [],
-  "author": "OGS GmbH",
+  "name": "@ogs-gmbh/sassdoc-markdown",
+  "version": "0.0.0",
+  "description": "Convert your SassDoc documentation to Markdown",
+  "keywords": [
+    "sassdoc",
+    "markdown",
+    "sassdoc-markdown",
+    "convert",
+    "sassdoc-plugin",
+    "sassdoc-markdown-plugin",
+    "sassdoc-convert",
+    "sassdoc-converter"
+  ],
+  "homepage": "https://github.com/OGS-GmbH/sassdoc-markdown",
+  "bugs": "https://github.com/OGS-GmbH/sassdoc-markdown/issues",
   "license": "MIT",
+  "author": "OGS GmbH",
+  "bin": "./main.mjs",
+  "contributors": [
+    {
+      "name": "Simon Kovtyk",
+      "email": "simon@kovtyk.com",
+      "url": "https://simonkov.dev"
+    }
+  ],
+  "exports": {
+    ".": {
+      "types": "./public-api.d.ts",
+      "default": "./public-api.mjs"
+    }
+  },
+  "main": "./public-api.mjs",
+  "types": "./public-api.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OGS-GmbH/sassdoc-markdown"
+  },
+  "type": "module",
+  "scripts": {
+    "ci:build:main:production": "node .esbuild/build.mjs",
+    "ci:docs:extract:typedoc": "typedoc && bash ./prepare-typedoc.sh",
+    "ci:docs:main:vitepress": "vitepress build .vitepress",
+    "ci:pr:commitlint:main:commitlint": "commitlint",
+    "ci:pr:lint:main:eslint": "eslint .",
+    "prepare": "husky",
+    "vitepress": "vitepress dev .vitepress",
+    "vitepress:preview": "vitepress preview .vitepress"
+  },
   "dependencies": {
-    "@ogs-gmbh/markdown": "file:/home/simonkov/Projects/ogs/github/markdown/dist/main",
-    "yargs": "^18.0.0"
+    "@ogs-gmbh/markdown": "^1",
+    "@ogs-gmbh/stdx": "^1",
+    "commander": "^14"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.28.0",
+    "@eslint/json": "^0.6.0",
+    "@eslint/markdown": "^6.5.0",
+    "@ogs-gmbh/linter": "^1.3.2",
+    "@stylistic/eslint-plugin-js": "^2.13.0",
+    "@stylistic/eslint-plugin-plus": "^2.13.0",
+    "@stylistic/eslint-plugin-ts": "^2.13.0",
+    "@types/eslint__js": "^8.42.3",
+    "commitizen": "^4.3.1",
+    "eslint": "^9.31.0",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "globals": "^15.15.0",
+    "typescript-eslint": "^8.34.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "npm-package-json-lint": "^8.0.0",
     "@types/node": "^25.0.2",
     "esbuild": "^0.27.1",
     "esbuild-plugin-d.ts": "^1.3.1",
     "esbuild-plugin-file-copy": "2.0.0-next.0",
     "esbuild-plugin-file-path-extensions": "^2.1.4",
     "esbuild-plugin-package-json": "2.0.0",
+    "fast-glob": "^3.3.3",
     "typescript": "^5.9.3",
-    "@types/yargs": "^17"
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "vitepress": "^1",
+    "vitepress-plugin-group-icons": "^1.6.5"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "directory": "dist/main"
   }
 }
