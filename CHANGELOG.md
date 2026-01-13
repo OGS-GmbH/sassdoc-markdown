@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/OGS-GmbH/sassdoc-markdown/compare/v1.0.1...v1.0.2) (2026-01-13)
+
+
+### Bug Fixes
+
+* **docs:** improve readme ([c36d3d8](https://github.com/OGS-GmbH/sassdoc-markdown/commit/c36d3d86d74cefdc2a36be2dc2da41ddab9ee49d))
+* **readme:** change layout ([9fa0b17](https://github.com/OGS-GmbH/sassdoc-markdown/commit/9fa0b1706c2444bc75f79cefea59a3ae99d31b0c))
+
 ## [1.0.1](https://github.com/OGS-GmbH/sassdoc-markdown/compare/v1.0.0...v1.0.1) (2026-01-12)
 
 
