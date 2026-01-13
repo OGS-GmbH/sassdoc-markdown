@@ -6,12 +6,12 @@
 
 <img src="https://raw.githubusercontent.com/OGS-GmbH/sassdoc-markdown/refs/heads/main/docs/preview.avif" alt="sassdoc-markdown preview" />
 
-*If you like this project, consider giving it a ⭐ to show your support!*<br/>
-*It also helps others to discover it.*
-
 <a href="./LICENSE" target="_blank"><img src="https://img.shields.io/github/license/OGS-GmbH/sassdoc-markdown?color=0f434e&logo=hackthebox&logoColor=000000&labelColor=ffffff" /></a>
 <a href="https://github.com/OGS-GmbH/sassdoc-markdown/actions/workflows/main-deploy.yml" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/OGS-GmbH/sassdoc-markdown/main-deploy.yml?color=0f434e&logo=rocket&logoColor=000000&labelColor=ffffff" /></a>
 <a href="https://www.npmjs.com/package/@ogs-gmbh/sassdoc-markdown" target="_blank"><img src="https://img.shields.io/npm/v/%40ogs-gmbh%2Fsassdoc-markdown?color=0f434e&logo=npm&logoColor=000000&labelColor=ffffff" /></a>
+
+*If you like this project, consider giving it a ⭐ to show your support!*<br/>
+*It also helps others to discover it.*
 
 - **Automated SassDoc Generation**\
   Programmatic extraction of documentation from Sass/SCSS source files based on standardized SassDoc annotations.
