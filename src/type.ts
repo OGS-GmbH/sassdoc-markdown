@@ -5,7 +5,7 @@
  * @since 1.0.0
  * @author Simon Kovtyk
  */
-type Type = "String" | "Number" | "Boolean" | "Color" | "Map" | "List" | "Null" | "variable" | "ArgList" | "function" | "mixin" | "Selector" | "Any" | (string & {});
+type Type = "variable" | "function" | "mixin" | "placeholder";
 
 /**
  * Union containing all possible fields of a SassDoc node

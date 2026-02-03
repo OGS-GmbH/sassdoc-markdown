@@ -1,4 +1,4 @@
-import { code, heading, paragraph, rule, table, tableCell, tableRow, type TableRowNode, type Node as MarkdownNode, list, link, linebreak } from "@ogs-gmbh/markdown";
+import { code, heading, paragraph, table, tableCell, tableRow, type TableRowNode, type Node as MarkdownNode, list, link, linebreak } from "@ogs-gmbh/markdown";
 /* eslint-disable-next-line @tseslint/no-shadow */
 import type { Example, Link, Node, NodeField, Parameter, Property, Require, Since } from "../type";
 import { transformDefaultHeader } from "./additional";
@@ -20,8 +20,6 @@ function transformAccess (node: Node): MarkdownNode[] | null {
     heading("h2", "Access"),
     linebreak("system"),
     paragraph(node.access),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -43,8 +41,6 @@ function transformAlias (node: Node): MarkdownNode[] | null {
     heading("h2", "Alias"),
     linebreak("system"),
     paragraph(node.alias),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -66,8 +62,6 @@ function transformAuthor (node: Node): MarkdownNode[] | null {
     heading("h2", "Author"),
     linebreak("system"),
     paragraph(node.author),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -89,8 +83,6 @@ function transformContent (node: Node): MarkdownNode[] | null {
     heading("h2", "Content"),
     linebreak("system"),
     paragraph(node.content),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -112,8 +104,6 @@ function transformDeprecated (node: Node): MarkdownNode[] | null {
     heading("h2", "Deprecated"),
     linebreak("system"),
     paragraph(node.deprecated),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -128,7 +118,7 @@ function transformDeprecated (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformExample (node: Node): MarkdownNode[] | null {
-  if (!node.example)
+  if (!node.example || node.example.length === 0)
     return null;
 
   return [
@@ -136,11 +126,10 @@ function transformExample (node: Node): MarkdownNode[] | null {
     linebreak("system"),
     node.example.flatMap((example: Example) => [
       code(example.code, {
-        language: example.type
+        language: example.type,
+        isBlock: true
       })
     ]),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -155,15 +144,13 @@ function transformExample (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformGroup (node: Node): MarkdownNode[] | null {
-  if (!node.group)
+  if (!node.group || node.group.length === 0)
     return null;
 
   return [
     heading("h2", "Groups"),
     linebreak("system"),
-    list("unordered", ...node.group),
-    rule("hyphens"),
-    linebreak("system")
+    list("unordered", ...node.group)
   ];
 }
 
@@ -177,15 +164,13 @@ function transformGroup (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformIgnore (node: Node): MarkdownNode[] | null {
-  if (!node.ignore)
+  if (!node.ignore || node.ignore.length === 0)
     return null;
 
   return [
     heading("h2", "Ignores"),
     linebreak("system"),
-    list("unordered", ...node.ignore),
-    rule("hyphens"),
-    linebreak("system")
+    list("unordered", ...node.ignore)
   ];
 }
 
@@ -199,15 +184,18 @@ function transformIgnore (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformLink (node: Node): MarkdownNode[] | null {
-  if (!node.link)
+  if (!node.link || node.link.length === 0)
     return null;
 
   return [
     heading("h2", "Links"),
     linebreak("system"),
-    node.link.flatMap((_link: Link) => link(_link.url, _link.caption)),
-    linebreak("system"),
-    rule("hyphens"),
+    node.link.flatMap((_link: Link) => link(
+      _link.url,
+      _link.caption && _link.caption.length !== 0
+        ? _link.caption
+        : _link.url
+    )),
     linebreak("system")
   ];
 }
@@ -229,8 +217,6 @@ function transformOutput (node: Node): MarkdownNode[] | null {
     heading("h2", "Output"),
     linebreak("system"),
     paragraph(node.output),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -245,7 +231,7 @@ function transformOutput (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformParameter (node: Node): MarkdownNode[] | null {
-  if (!node.parameter)
+  if (!node.parameter || node.parameter.length === 0)
     return null;
 
   return [
@@ -263,8 +249,6 @@ function transformParameter (node: Node): MarkdownNode[] | null {
         tableCell(parameter.description)
       ))
     ),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -279,7 +263,7 @@ function transformParameter (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformProperty (node: Node): MarkdownNode[] | null {
-  if (!node.property)
+  if (!node.property || node.property.length === 0)
     return null;
 
   return [
@@ -297,8 +281,6 @@ function transformProperty (node: Node): MarkdownNode[] | null {
         tableCell(property.description)
       ))
     ),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -313,7 +295,7 @@ function transformProperty (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformRequire (node: Node): MarkdownNode[] | null {
-  if (!node.require)
+  if (!node.require || node.require.length === 0)
     return null;
 
   return [
@@ -329,8 +311,6 @@ function transformRequire (node: Node): MarkdownNode[] | null {
         tableCell(require.name)
       ))
     ),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -354,8 +334,6 @@ function transformReturn (node: Node): MarkdownNode[] | null {
     code(node[ "return" ].type),
     linebreak("system"),
     paragraph(node[ "return" ].description),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -370,15 +348,13 @@ function transformReturn (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformSee (node: Node): MarkdownNode[] | null {
-  if (!node.see)
+  if (!node.see || node.see.length === 0)
     return null;
 
   return [
     heading("h2", "See"),
     linebreak("system"),
     node.see.map((seeNode: Node): MarkdownNode => paragraph(seeNode.context.name)),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -393,15 +369,13 @@ function transformSee (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformSince (node: Node): MarkdownNode[] | null {
-  if (!node.since)
+  if (!node.since || node.since.length === 0)
     return null;
 
   return [
     heading("h2", "Since"),
     linebreak("system"),
     node.since.flatMap((since: Since) => paragraph(since.version)),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }
@@ -416,15 +390,13 @@ function transformSince (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformThrow (node: Node): MarkdownNode[] | null {
-  if (!node[ "throw" ])
+  if (!node[ "throw" ] || node[ "throw" ].length === 0)
     return null;
 
   return [
     heading("h2", "Throws"),
     linebreak("system"),
-    list("unordered", ...node[ "throw" ]),
-    rule("hyphens"),
-    linebreak("system")
+    list("unordered", ...node[ "throw" ])
   ];
 }
 
@@ -438,15 +410,13 @@ function transformThrow (node: Node): MarkdownNode[] | null {
  * @author Simon Kovtyk
  */
 function transformTodo (node: Node): MarkdownNode[] | null {
-  if (!node.todo)
+  if (!node.todo || node.todo.length === 0)
     return null;
 
   return [
     heading("h2", "Type"),
     linebreak("system"),
-    list("unordered", ...node.todo),
-    rule("hyphens"),
-    linebreak("system")
+    list("unordered", ...node.todo)
   ];
 }
 
@@ -467,8 +437,6 @@ function transformType (node: Node): MarkdownNode[] | null {
     heading("h2", "Type"),
     linebreak("system"),
     paragraph(node.type),
-    linebreak("system"),
-    rule("hyphens"),
     linebreak("system")
   ];
 }

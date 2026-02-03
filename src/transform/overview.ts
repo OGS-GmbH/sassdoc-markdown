@@ -1,8 +1,8 @@
 /* eslint-disable-next-line @tseslint/no-shadow */
 import type { Node, Type } from "../type";
-import { define, heading, linebreak, list, rule } from "@ogs-gmbh/markdown";
+import { define, heading, linebreak, link, list } from "@ogs-gmbh/markdown";
 import type { FilteredNodes } from "./filter";
-import { typeToHeading } from "../utils";
+import { getLinkToNodeFile, typeToHeading } from "../utils";
 
 /**
  * Transform overview of all nodes
@@ -14,22 +14,33 @@ import { typeToHeading } from "../utils";
  * @author Simon Kovtyk
  */
 function transformOverview (filteredNodes: Record<Type, FilteredNodes>): string {
-  return Object.entries(
-    filteredNodes
-  ).map(([ key, filteredNodesItem ]: [Type, FilteredNodes]) => {
-    const headingContent: string = filteredNodesItem.isCustom ? key : typeToHeading(key);
+  return define(
+    heading("h1", "Reference"),
+    linebreak("system"),
+    ...Object.entries(
+      filteredNodes
+    ).map(([ type, filteredNodesItem ]: [string, FilteredNodes]): string => {
+      const headingContent: string = filteredNodesItem.isCustom ? type : typeToHeading(type as Type);
 
-    return define(
-      heading("h2", headingContent.capitalize()),
-      linebreak("system"),
-      list(
-        "unordered",
-        ...filteredNodesItem.nodes.map((node: Node): string => node.context.name)
-      ),
-      rule("hyphens")
-    ).toString();
-  })
-    .join("\n");
+      return define(
+        heading("h2", headingContent.capitalize()),
+        linebreak("system"),
+        list(
+          "unordered",
+          ...filteredNodesItem.nodes.map(
+            (node: Node): string =>
+              link(
+                getLinkToNodeFile(
+                  type,
+                  node
+                ),
+                node.context.name
+              ).toString()
+          )
+        )
+      ).toString();
+    })
+  ).toString();
 }
 
 export {

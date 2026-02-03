@@ -1,10 +1,15 @@
+---
+prev: false
+next: false
+---
+
 # Programatically
 
 ## Usage
 
 As another public API, `sassdoc-markdown` can be called by your own script. If you're unsure about parts of the API, keep in mind, that you can always consult the [reference](/reference) for detailed documentation.
 
-Here is an example with usage of [`run`](../reference/functions/run);
+Here is an example with usage of [`run`](/reference/Transform/run);
 
 ```ts [example-script.ts]
 import { run, type Node } from "@ogs-gmbh/sassdoc-markdown";
@@ -12,14 +17,13 @@ import { run, type Node } from "@ogs-gmbh/sassdoc-markdown";
 // Do something...
 
 const nodes: Node[] = previousCalls;
-const out: string = "./dist/sassdoc-markdown";
 
-run(nodes, out);
+run(nodes);
 ```
 
 ## Transform
 
-If you plan to transform SassDoc's output partially by yourself or you want to make use of our transform-functions, here is an example with usage of [`transformAuthor`](/reference/functions/transformAuthor):
+If you plan to transform SassDoc's output partially by yourself or you want to make use of our transform-functions, here is an example with usage of [`transformAuthor`](/reference/Transform/transformAuthor):
 
 Since we internally use [`@ogs-gmbh/markdown`](https://github.com/OGS-GmbH/markdown), you can also make use of it for getting fine-grained control.
 
