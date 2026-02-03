@@ -1,6 +1,6 @@
 {
   "name": "@ogs-gmbh/sassdoc-markdown",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Convert your SassDoc documentation to Markdown",
   "keywords": [
     "sassdoc",
