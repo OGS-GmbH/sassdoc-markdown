@@ -73,7 +73,7 @@ $ sassdoc-markdown --help
 
 The command will produce following output:
 
-```
+```sh
 Usage: sassdoc-markdown [options]
 
 Options:
