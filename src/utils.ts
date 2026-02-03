@@ -1,4 +1,10 @@
-import type { Type } from "./type";
+import { getArgs, type Args } from "./args";
+/* eslint-disable-next-line @tseslint/no-shadow */
+import type { Node, Type } from "./type";
+import path from "node:path";
+
+const SCSS_LINE_TERMINATOR: string = ";";
+const MARKDOWN_EXTENSION: string = "md";
 
 /**
  * Convert a SassDoc node type to a heading string
@@ -10,36 +16,16 @@ import type { Type } from "./type";
  */
 function typeToHeading (type: Type): string {
   switch (type) {
-    case "String": {
-      return "Strings";
-    }
-
-    case "Number": {
-      return "Numbers";
-    }
-
-    case "Boolean": {
-      return "Booleans";
-    }
-
-    case "Color": {
-      return "Colors";
-    }
-
-    case "Map": {
-      return "Maps";
-    }
-
-    case "List": {
-      return "Lists";
-    }
-
     case "function": {
       return "Functions";
     }
 
-    case "Mixin": {
+    case "mixin": {
       return "Mixins";
+    }
+
+    case "variable": {
+      return "Variables";
     }
 
     default: {
@@ -48,6 +34,55 @@ function typeToHeading (type: Type): string {
   }
 }
 
+function toKebabCase (value: string): string {
+  return value.toLowerCase()
+    .replaceAll(" ", "-");
+}
+
+function getIndexFileName (): string {
+  return `index.${ MARKDOWN_EXTENSION }`;
+}
+
+function getFileNameFromNode (node: Node): string {
+  return `${ toKebabCase(node.context.name) }.${ MARKDOWN_EXTENSION }`;
+}
+
+function getFsDirToType (type: string): string {
+  const args: Args = getArgs();
+
+  return path.join(
+    args.out,
+    toKebabCase(type)
+  );
+}
+
+function getFsDirToNodeFile (type: string, node: Node): string {
+  const args: Args = getArgs();
+
+  return path.join(
+    args.out,
+    toKebabCase(type),
+    getFileNameFromNode(node)
+  );
+}
+
+function getLinkToNodeFile (type: string, node: Node): string {
+  const args: Args = getArgs();
+
+  return path.join(
+    args.baseUrl ?? "",
+    toKebabCase(type),
+    getFileNameFromNode(node)
+  );
+}
+
 export {
-  typeToHeading
+  SCSS_LINE_TERMINATOR,
+  typeToHeading,
+  toKebabCase,
+  getIndexFileName,
+  getFileNameFromNode,
+  getFsDirToType,
+  getFsDirToNodeFile,
+  getLinkToNodeFile
 };
