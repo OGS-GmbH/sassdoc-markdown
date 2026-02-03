@@ -7,12 +7,6 @@
 
 * add git-revision support ([a07cad1](https://github.com/OGS-GmbH/sassdoc-markdown/commit/a07cad1ce52cf46537fa3ca199b3017d2202414c))
 
-## [1.1.0](https://github.com/OGS-GmbH/sassdoc-markdown/compare/v1.0.2...v1.1.0) (2026-02-03)
-
-
-### Features
-
-* add git-revision support ([a07cad1](https://github.com/OGS-GmbH/sassdoc-markdown/commit/a07cad1ce52cf46537fa3ca199b3017d2202414c))
 
 ## [1.0.2](https://github.com/OGS-GmbH/sassdoc-markdown/compare/v1.0.1...v1.0.2) (2026-01-13)
 
