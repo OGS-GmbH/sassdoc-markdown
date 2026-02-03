@@ -42,6 +42,7 @@ function filterNodes (nodes: Node[]): Record<Type, FilteredNodes> {
     if (node.access === "private")
       continue;
 
+    /* eslint-disable @security/detect-object-injection */
     const group: string = node.group?.at(0) ?? node.context.type;
     const currentFilteredNode: FilteredNodes = {
       isCustom: node.group?.at(0) !== undefined,
@@ -51,6 +52,7 @@ function filterNodes (nodes: Node[]): Record<Type, FilteredNodes> {
     };
 
     filteredNodes[ group ] = currentFilteredNode;
+    /* eslint-enable @security/detect-object-injection */
   }
 
   if (Object.keys(filteredNodes).length === 0) {

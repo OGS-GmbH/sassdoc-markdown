@@ -1,29 +1,29 @@
 import {
   ESLINT_JSON_RULES,
   ESLINT_MARKDOWN_RULES,
-  JS_RULES_PRESET,
-  TS_RULES_PRESET
+  NODE_JS_RULES_PRESET,
+  NODE_TS_RULES_PRESET
 } from "@ogs-gmbh/linter";
-import eslintJson from "@eslint/json";
-import eslintMarkdown from "@eslint/markdown";
+import eslintJsonPlugin from "@eslint/json";
+import eslintMarkdownPlugin from "@eslint/markdown";
 import globals from "globals";
-import stylisticJs from "@stylistic/eslint-plugin-js";
-import stylisticPlus from "@stylistic/eslint-plugin-plus";
-import stylisticTs from "@stylistic/eslint-plugin-ts";
-import tseslint from "typescript-eslint";
-import unicorn from "eslint-plugin-unicorn";
+import securityPlugin from "eslint-plugin-security";
+import stylisticPlugin from "@stylistic/eslint-plugin";
+import jsdocPlugin from "eslint-plugin-jsdoc";
+import tseslintPlugin from "typescript-eslint";
+import unicornPlugin from "eslint-plugin-unicorn";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig(
   {
     plugins: {
-      "@tseslint": tseslint.plugin,
-      "@unicorn": unicorn,
-      "@stylistic/js": stylisticJs,
-      "@stylistic/ts": stylisticTs,
-      "@stylistic/plus": stylisticPlus,
-      "@markdown": eslintMarkdown,
-      "@json": eslintJson
+      "@tseslint": tseslintPlugin.plugin,
+      "@unicorn": unicornPlugin,
+      "@stylistic": stylisticPlugin,
+      "@security": securityPlugin,
+      "@markdown": eslintMarkdownPlugin,
+      "@jsdoc": jsdocPlugin,
+      "@json": eslintJsonPlugin
     }
   },
   {
@@ -34,16 +34,17 @@ export default defineConfig(
       ".vscode",
       "node_modules",
       "dist",
-      "CHANGELOG.md",
-      "CODE_OF_CONDUCT.md",
-      "README.md",
       ".vitepress/.vitepress/cache"
     ]
   },
   {
-    files: [ "**/*.ts" ],
+    files: [
+      "**/*.ts",
+      "**/*.mts",
+      "**/*.cts"
+    ],
     languageOptions: {
-      parser: tseslint.parser,
+      parser: tseslintPlugin.parser,
       globals: globals.browser,
       parserOptions: {
         projectService: {
@@ -55,15 +56,23 @@ export default defineConfig(
         tsconfigRootDir: import.meta.dirname
       }
     },
-    rules: TS_RULES_PRESET
+    rules: NODE_TS_RULES_PRESET
   },
   {
-    files: [ "**/*.js", "**/*.mjs", "**/*.cjs" ],
-    rules: JS_RULES_PRESET
+    files: [
+      "**/*.js",
+      "**/*.mjs",
+      "**/*.cjs"
+    ],
+    rules: NODE_JS_RULES_PRESET
   },
   {
     files: [ "**/*.md" ],
-    rules: ESLINT_MARKDOWN_RULES
+    rules: ESLINT_MARKDOWN_RULES,
+    language: "@markdown/gfm",
+    languageOptions: {
+      frontmatter: "yaml"
+    }
   },
   {
     files: [ "**/*.json" ],
