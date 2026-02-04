@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/OGS-GmbH/sassdoc-markdown/compare/v1.1.0...v1.1.1) (2026-02-04)
+
+
+### Bug Fixes
+
+* unusual usage of path.join resulting in invalid paths ([96c7af1](https://github.com/OGS-GmbH/sassdoc-markdown/commit/96c7af17ce0605463c38478734897e14494080b5))
+
 ## [1.1.0](https://github.com/OGS-GmbH/sassdoc-markdown/compare/v1.0.2...v1.1.0) (2026-02-03)
 
 
