@@ -83,12 +83,13 @@ function getDefinitionHref (node: Node): string {
   const lastRevisionHash: string = getRevisitionHash();
   const args: Args = getArgs();
 
-  return path.join(
-    githubRepositoryViewUrl.toString(),
+  const pathSegments: string = path.join(
     lastRevisionHash,
     args.srcDir ?? "",
     `${ node.file.path }#L${ node.context.line.start }`
   );
+
+  return `${ githubRepositoryViewUrl.toString() }/${ pathSegments }`;
 }
 
 function getDefinitionAlt (node: Node): string {
